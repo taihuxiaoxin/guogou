@@ -4,6 +4,7 @@ import frist from "./routes/frist"
 import cart from "./routes/cart"
 import list from "./routes/list"
 import Threelist from "@/views/list/threelist"
+import Notfound from "@/views/notfound"
 import Detail from "./routes/detail"
 Vue.use(VueRouter)
 
@@ -11,6 +12,7 @@ const routes = [
   {path:"/" ,redirect: "/frist"},
   {path:"/list" ,redirect: "/list/twolist"},
   {path:"/threelist" ,component:Threelist },
+  {path:"*" ,component:Notfound },
   ...frist,
   cart,
   list,
