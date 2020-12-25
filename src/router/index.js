@@ -3,12 +3,18 @@ import VueRouter from 'vue-router'
 import frist from "./routes/frist"
 import cart from "./routes/cart"
 import list from "./routes/list"
+import Threelist from "@/views/list/threelist"
+import Detail from "./routes/detail"
 Vue.use(VueRouter)
 
 const routes = [
+  {path:"/" ,redirect: "/frist"},
+  {path:"/list" ,redirect: "/list/twolist"},
+  {path:"/threelist" ,component:Threelist },
   ...frist,
   cart,
-  list
+  list,
+  Detail
 ]
 
 const router = new VueRouter({
