@@ -1,5 +1,5 @@
-import City from "@/views/frist/city"
-import Frist from "@/views/frist/frist"
+import City from "@/views/first/city"
+import Frist from "@/views/first/frist"
 
 export default [
     {path:"/frist",component:Frist},
