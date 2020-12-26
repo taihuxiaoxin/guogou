@@ -1,3 +1,4 @@
+
 import Center from "@/views/center/center";
 
 var centerRouter = {
@@ -6,3 +7,4 @@ var centerRouter = {
 };
 
 export default centerRouter;
+
