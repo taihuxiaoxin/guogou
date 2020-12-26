@@ -1,5 +1,4 @@
 <template>
-
   <div>
       <van-loading size="24px" type="spinner" vertical v-show="isLoading"
             >加载中...</van-loading
@@ -14,7 +13,7 @@
       </van-swipe>
     </div>
     <div class="first-screen-news">
-      <div>
+      <div >
         <img
           src="http://img06.yiguoimg.com/e/web/161222/018522/134216/news.png"
           alt=""
@@ -118,6 +117,7 @@ export default {
           this.images4.push(el.pictureUrl);
           
         })
+        
         ret.Data.list.forEach(el=>{
           el.adPictures.forEach(e=>{
           this.images5.push(e.pictureUrl)
@@ -126,7 +126,7 @@ export default {
         ret.Data.price.forEach(el=>{
           this.images6.push(el)
         })
-        
+
         this.isLoading = false;
         
         ;
@@ -158,9 +158,10 @@ export default {
 .first-screen-news {
   width: 100%;
   height: 43px;
+  text-align: center;
 
   img {
-    width: 88px;
+    width: 25%;
   
     text-align: center;
     padding-top: 13px;
@@ -208,13 +209,14 @@ export default {
     box-sizing: border-box;
     li {
     float: left;
-width: 48%;
+    width: 48%;
     padding: 8px;
     box-sizing: border-box;
     // box-shadow: 5px 5px 3px #CCCCCC;
     border: 3px solid #CCCCCC;
     margin-right: 1%;
     margin-left: 1%;
+    text-align: center;
 
     margin-bottom: 2px;
     a{
@@ -222,19 +224,20 @@ width: 48%;
       overflow: hidden;
       text-overflow: ellipsis;
       color:  #333;
-      width: 180px;
+      width: 98%;
       display: block;
 
     }
     
-     img {
-    height: 218px;
+     img {   
+    height: 100%;
     border-radius:5px;
     display: inline;
+    width: 100%;
 }
 strong{
   color: red;
-  font-size: 26px;
+  font-size: 14px;
 
 }
 i{
@@ -253,4 +256,3 @@ i{
 
 
 </style>
-
