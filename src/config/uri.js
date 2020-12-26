@@ -12,7 +12,7 @@ export default {
     getonelist:"https://www.fastmock.site/mock/c9f35a6d14adb4c434286ca22844ff69/v1/list",
     //二级列表 post 参数"gc_id=1094" gc_id在一级分类获取
 
-    gettowlist:"http://127.0.0.1/city.php?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1608814714114&act=mobile_cate&op=index",
+    gettowlist:"https://www.fastmock.site/mock/c9f35a6d14adb4c434286ca22844ff69/v1/twolist",
     //参数gcId和page,gcID是二级商品信息的名字
     getthreelist:`http://127.0.0.1/city.php?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=${time}&act=goods&op=goodsList`,
 

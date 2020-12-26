@@ -77,7 +77,7 @@
                   // console.log(ret1);
                   Toast(ret.msg + ",2s后跳转登录页面！");
                   setTimeout(() => {
-                    this.$router.push('/login');
+                    this.$router.push('/user/login');
                   }, 2000);
                 });
               } else {
