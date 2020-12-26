@@ -1,3 +1,4 @@
+
 <template>
   <div class="center1" >
     <!--头部  -->
@@ -206,3 +207,4 @@ img,span{
     width: 40px;
 }
 </style>
+

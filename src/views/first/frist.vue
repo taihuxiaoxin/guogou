@@ -1,4 +1,5 @@
 <template>
+
   <div>
       <van-loading size="24px" type="spinner" vertical v-show="isLoading"
             >加载中...</van-loading
@@ -252,3 +253,4 @@ i{
 
 
 </style>
+
