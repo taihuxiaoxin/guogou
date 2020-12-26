@@ -6,6 +6,8 @@ import list from "./routes/list"
 import Threelist from "@/views/list/threelist"
 import Notfound from "@/views/notfound"
 import Detail from "./routes/detail"
+import centerRouter from "./routes/center";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,7 +18,9 @@ const routes = [
   ...frist,
   cart,
   list,
-  Detail
+  Detail,
+  centerRouter,
+
 ]
 
 const router = new VueRouter({
