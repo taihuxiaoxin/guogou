@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: "/", redirect: "/frist" },
   { path: "/list", redirect: "/list/twolist" },
-  { path: "/threelist", component: Threelist },
+  { path: "/threelist/:gc_id", component: Threelist },
   ...frist,
   cart,
   list,
@@ -27,7 +27,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
 })
 
 router.beforeEach((to,from,next) => {
