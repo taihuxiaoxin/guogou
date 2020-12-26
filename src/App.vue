@@ -21,10 +21,9 @@ export default {
       if(jwt) {
         this.$store.commit('setJwt',jwt);
       }
-    }
+    },
 }
 </script>
 <style lang="scss">
-
 
 </style>

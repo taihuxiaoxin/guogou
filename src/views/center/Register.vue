@@ -78,6 +78,7 @@
                   Toast(ret.msg + ",2s后跳转登录页面！");
                   setTimeout(() => {
                     this.$router.push('/user/login');
+                    console.log(123);
                   }, 2000);
                 });
               } else {
