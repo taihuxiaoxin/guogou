@@ -1,3 +1,10 @@
-import center from '@/views/center/center.vue';
-const centerRouter = {path:'/center',component:center};
+
+import Center from "@/views/center/center";
+
+var centerRouter = {
+    path: "/center",
+    component: Center,
+};
+
 export default centerRouter;
+
