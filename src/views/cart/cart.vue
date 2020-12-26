@@ -84,7 +84,7 @@ export default {
 			Select: [],
 			datas: [],
 			number_: 0,
-			list: null
+			list: null,
 		};
 	},
 	methods: {
