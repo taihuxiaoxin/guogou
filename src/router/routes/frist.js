@@ -1,7 +1,8 @@
 import City from "@/views/first/city"
 import Frist from "@/views/first/frist"
 
-export default [
+const frist =  [
     {path:"/frist",component:Frist},
     {path:"/city",component:City},
 ]
+export default frist

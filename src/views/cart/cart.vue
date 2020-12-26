@@ -2,8 +2,8 @@
 	<div class="shop">
 		<!-- 未登录 -->
 		<div class="shoping" v-show="lookLogin">
-			登录可同步购物车内商品
-			<button class="loginShop">登录</button>
+			已登录：欢迎
+			<button class="loginShop">{{ this.list }}</button>
 		</div>
 		<!-- 购物车为空列表 -->
 		<div class="shopCnt" v-show="lookList">
@@ -18,11 +18,14 @@
 			<ul class="listUl">
 				<van-checkbox-group v-model="Select" ref="checkboxGroup">
 					<li v-for="(item, index) in datas" :key="index">
-						<!-- <van-checkbox v-model="checked" checked-color="rgb(8,182,125)" class="checkbox_" value="current1" /> -->
+						<van-checkbox class="checkbox_" checked-color="rgb(8,182,125)" :name="index" @click="checkbox_item(item)"></van-checkbox>
 
-						<van-checkbox class="checkbox_" checked-color="rgb(8,182,125)" :name="index"></van-checkbox>
-
-						<div class="look_img"><img style="width: 84px;" :src="item.goods_image" /></div>
+						<div class="look_img">
+							<img
+								style="width: 84px;"
+								src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20200521ac%2F695%2Fw445h250%2F20200521%2F4f95-itvqccc3736277.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1611569076&t=7a5d499b512aa3a4a04dde9ab95ad0ee"
+							/>
+						</div>
 						<div class="detailed">
 							<div class="detailed_1">
 								<span class="sp_1">{{ item.goods_name }}</span>
@@ -33,7 +36,15 @@
 							<div class="detailed_2">
 								<button class="deleteBtn" @click="dele(item.gc_id, index)">删除</button>
 								<div class="vant_ste">
-									<van-stepper :value="item.num" min="1" :max="item.goods_storage" input-width="20px" button-size="25px" @change="change_(item)" />
+									<van-stepper
+										:value="item.num"
+										min="1"
+										:max="item.goods_storage"
+										input-width="20px"
+										button-size="25px"
+										@plus="plus(item)"
+										@minus="minus(item)"
+									/>
 								</div>
 							</div>
 						</div>
@@ -41,12 +52,9 @@
 				</van-checkbox-group>
 			</ul>
 		</div>
-		<div class="footerShop">
-			<van-submit-bar :price="price" button-text="去结算" @submit="onSubmit">
-				<!-- <van-checkbox v-model="checked_2">全选</van-checkbox> -->
-				<van-checkbox type="primary" @click="checkAll" v-model="check">全选</van-checkbox>
-			</van-submit-bar>
-		</div>
+		<van-submit-bar :price="price" button-text="去结算" @submit="onSubmit" class="van-submit-bar">
+			<van-checkbox type="primary" @click="checkAll" v-model="check">全选</van-checkbox>
+		</van-submit-bar>
 	</div>
 </template>
 
@@ -75,7 +83,8 @@ export default {
 			price: 0,
 			Select: [],
 			datas: [],
-			number_:0,
+			number_: 0,
+			list: null
 		};
 	},
 	methods: {
@@ -83,10 +92,18 @@ export default {
 			this.$router.push('/frist');
 		},
 		onSubmit() {
-			console.log(this.price/100);
+			console.log(this.price / 100);
 		},
 		checkAll() {
 			this.$refs.checkboxGroup.toggleAll(true);
+			this.price = 0;
+			this.datas.forEach(v => {
+				if (this.check) {
+					this.price += v.num * v.goods_price * 100;
+				} else {
+					this.Select = [];
+				}
+			});
 		},
 		dele(val, index) {
 			this.datas.some(v => {
@@ -95,70 +112,45 @@ export default {
 					this.datas.splice(index, 1);
 				}
 			});
-			localStorage.setItem('data', JSON.stringify(this.datas));
+			localStorage.setItem(this.list, JSON.stringify(this.datas));
 		},
-		change_(val) {
-			// console.log(val)
-			val.num++;
-			// console.log(val);
+		plus(item) {
+			item.num++;
+			// console.log(item.num)
+			this.price = this.price + item.goods_price * 100;
+		},
+		minus(item) {
+			item.num--;
+			// console.log(item.num)
+			this.price = this.price - item.goods_price * 100;
+		},
+		checkbox_item(item) {
+			this.price += item.num * item.goods_price * 100;
 		}
 	},
 	created() {
-		// 全选bug
-		// if(this.Select.length){
-		// }
-		// let arr = [
-		// 	{
-		// 		gc_id:596,
-		// 		goods_image:this.src,
-		// 		goods_image:this.src,
-		// 		goods_price:this.money,
-		// 		goods_name:this.title,
-		// 		goods_storage:10,
-		// 		num:this.value
-		// 	},
-		// 	{
-		// 		gc_id:597,
-		// 		goods_image:this.src,
-		// 		goods_image:this.src,
-		// 		goods_price:this.money,
-		// 		goods_name:this.title,
-		// 		goods_storage:10,
-		// 		num:this.value
-		// 	},
-		// 	{
-		// 		gc_id:598,
-		// 		goods_image:this.src,
-		// 		goods_image:this.src,
-		// 		goods_price:this.money,
-		// 		goods_name:this.title,
-		// 		goods_storage:10,
-		// 		num:this.value
-		// 	}
-		// ];
-		// console.log(arr);
-		// localStorage.setItem('data', JSON.stringify(arr));
-		let data_ = JSON.parse(localStorage.getItem('data'));
-		// console.log(data_);
-		this.datas = data_;
+		this.$http.get('/api/info').then(ret => {
+			// console.log(ret)
+			if (ret.code == 0) {
+				// console.log(ret.userinfo.mobile)
+				let data_ = JSON.parse(localStorage.getItem(ret.userinfo.mobile));
+				// console.log(data_)
+				this.list = ret.userinfo.mobile;
+				this.datas = data_;
+				if(this.datas.length<1){
+					this.lookList = true
+				}
+			}
+		});
 	},
 	watch: {
 		datas: {
 			handler() {
 				// console.log(this.datas)
-				localStorage.setItem('data', JSON.stringify(this.datas));
-				this.Select.forEach(v=>{
-					this.price += (this.datas[v].num)*(this.datas[v].goods_price)*100
-				})
-			},
-			deep: true
-		},
-		Select:{
-			handler(val) {
-			this.Select.forEach(v=>{
-				this.price += (this.datas[v].num)*(this.datas[v].goods_price)*100
-			})
-			console.log(this.price)
+				localStorage.setItem(this.list, JSON.stringify(this.datas));
+				if(this.datas.length<1){
+					this.lookList = true
+				}
 			},
 			deep: true
 		}
@@ -281,5 +273,8 @@ export default {
 			margin-top: 20px;
 		}
 	}
+}
+.van-submit-bar {
+	bottom: 51px;
 }
 </style>
