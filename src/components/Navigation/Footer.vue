@@ -1,16 +1,32 @@
 <template>
   <div class="foot">
     <van-tabbar v-model="active" placeholder  @change="changeTab">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="search">分类</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">购物车</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">我的易果</van-tabbar-item>
+      <van-tabbar-item icon="home-o" >首页</van-tabbar-item>
+      <van-tabbar-item><van-icon
+                    class="iconfont icon-category"
+                    slot="icon"
+                    size="25px"
+                />分类</van-tabbar-item>
+      <van-tabbar-item>
+        <van-icon
+                    class="iconfont icon-gouwuche"
+                    slot="icon"
+                    size="25px"
+                />购物车</van-tabbar-item>
+      <van-tabbar-item ><van-icon
+                    class="iconfont icon-wode1"
+                    slot="icon"
+                    size="25px"
+                />我的易果</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 <script>
 import Vue from "vue";
-import { Tabbar, TabbarItem } from "vant";
+import "@/assets/icon/iconfont.css";
+
+import { Tabbar, TabbarItem,Icon} from "vant";
+Vue.use(Icon);
 
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -44,4 +60,8 @@ export default {
   height: 50px;
 }
 
+.van-tabbar-item__icon .van-icon {
+    display: block;
+    font-size: 28px;
+}
 </style>
