@@ -1,7 +1,11 @@
 <template>
   <div class="foot">
-    <van-tabbar v-model="active" placeholder  @change="changeTab">
-      <van-tabbar-item icon="home-o" >首页</van-tabbar-item>
+    <van-tabbar v-model="active" placeholder  @change="changeTab" active-color="rgb(79, 192, 141)">
+      <van-tabbar-item ><van-icon
+                    class="iconfont icon-index"
+                    slot="icon"
+                    size="25px"
+                />首页</van-tabbar-item>
       <van-tabbar-item><van-icon
                     class="iconfont icon-category"
                     slot="icon"
@@ -60,8 +64,7 @@ export default {
   height: 50px;
 }
 
-.van-tabbar-item__icon .van-icon {
-    display: block;
-    font-size: 28px;
-}
+
+
+
 </style>
