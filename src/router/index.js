@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 const routes = [
   {path:"/" ,redirect: "/frist"},
   {path:"/list" ,redirect: "/list/twolist"},
-  {path:"/threelist" ,component:Threelist },
+  {path:"/threelist/:gc_id" ,component:Threelist },
   {path:"*" ,component:Notfound },
   ...frist,
   cart,
