@@ -157,9 +157,10 @@ export default {
 .first-screen-news {
   width: 100%;
   height: 43px;
+  text-align: center;
 
   img {
-    width: 88px;
+    width: 25%;
   
     text-align: center;
     padding-top: 13px;
