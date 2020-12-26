@@ -36,6 +36,11 @@ Vue.use(Tabbar);
 Vue.use(TabbarItem);
 export default {
   data() {
+
+
+
+
+    
     return {
       active: 0,
       url: ["/frist", "/list/twolist", "/cart","/center"],
