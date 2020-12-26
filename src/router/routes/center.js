@@ -1,3 +1,4 @@
+
 import Center from "@/views/center/center";
 import LR from "@/views/center/LR";
 import Login from "@/views/center/Login";
@@ -20,3 +21,4 @@ export default [
         ]
     },
 ]
+
