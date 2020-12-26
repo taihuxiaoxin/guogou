@@ -1,5 +1,8 @@
 <template>
   <div>
+      <van-loading size="24px" type="spinner" vertical v-show="isLoading"
+            >加载中...</van-loading
+        >
     <div class="aa"><Header></Header></div>
 
     <div>
@@ -68,7 +71,9 @@ import Vue from "vue";
 import { Swipe, SwipeItem, Lazyload } from "vant";
 import Header from "@/components/Navigation/Header";
 import uri from "@/config/uri";
+import { Loading } from 'vant';
 
+Vue.use(Loading);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Lazyload);
@@ -76,6 +81,7 @@ Vue.use(Lazyload);
 export default {
   data() {
     return {
+      isLoading: true,
       current: 0,
       images: [],
       images2:[],
@@ -118,8 +124,9 @@ export default {
         })
         ret.Data.price.forEach(el=>{
           this.images6.push(el)
-          console.log(el);
         })
+        
+        this.isLoading = false;
         
         ;
       });
