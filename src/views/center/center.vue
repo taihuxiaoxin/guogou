@@ -12,9 +12,16 @@
           <img
             class="header_sculpture_img"
             src="https://img02.yiguo.com/e/web/150703/00781/140145/no-pic.jpg"
+            v-show="$store.state.mobile"
           />
+          <!-- <img
+            class="header_sculpture_img"
+            :src="$store.state.mobile"
+            v-show="!$store.state.mobile"
+          /> -->
         </span>
-        <span class="header_signIn">登录/注册</span>
+        <span class="header_signIn" v-show="!$store.state.mobile">登录/注册</span>
+        <span class="header_signIn" v-show="$store.state.mobile">{{$store.state.mobile}}</span>
       </div>
     </div>
     <!-- account -->
@@ -99,11 +106,29 @@ import { Grid, GridItem } from "vant";
 Vue.use(Grid);
 Vue.use(GridItem);
 export default {
+  data () {
+    return {
+      icon:""
+    }
+  },
    methods:{
        logOn(){
            this.$router.push('/user/login')
        }
+   },
+   created () {
+     let x = localStorage.getItem("jwt");
+     if(!x){
+       return
+     }else{
+       this.$http.get("/api/info").then(ret=>{
+         if(ret.code===0){
+           this.$store.commit("setMob",ret.userinfo.mobile)
+         }
+        })
+     }
    }
+   
 };
 </script>
 <style lang="scss" scoped>
