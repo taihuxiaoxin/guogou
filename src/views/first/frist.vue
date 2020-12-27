@@ -1,4 +1,3 @@
-
 <template>
   <div>
       <van-loading size="24px" type="spinner" vertical v-show="isLoading"
@@ -14,7 +13,7 @@
       </van-swipe>
     </div>
     <div class="first-screen-news">
-      <div>
+      <div >
         <img
           src="http://img06.yiguoimg.com/e/web/161222/018522/134216/news.png"
           alt=""
@@ -118,6 +117,7 @@ export default {
           this.images4.push(el.pictureUrl);
           
         })
+        
         ret.Data.list.forEach(el=>{
           el.adPictures.forEach(e=>{
           this.images5.push(e.pictureUrl)
@@ -158,9 +158,10 @@ export default {
 .first-screen-news {
   width: 100%;
   height: 43px;
+  text-align: center;
 
   img {
-    width: 88px;
+    width: 25%;
   
     text-align: center;
     padding-top: 13px;
