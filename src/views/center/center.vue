@@ -4,21 +4,28 @@
     <div>
       <i class="iconfont icon-shezhi1 setting"></i>
     </div>
-    <div>
-      <div class="header">
-        <div class="header-center">
-          <span class="header_sculpture">
-            <img
-              class="header_sculpture_img"
-              src="https://img02.yiguo.com/e/web/150703/00781/140145/no-pic.jpg"
-            />
-          </span>
-          <div class="log">
+    <div @click="logOn">
+       <div class="header">
+      <div class="header-center" >
+        <span class="header_sculpture">
+          <img
+            class="header_sculpture_img"
+            src="https://img02.yiguo.com/e/web/150703/00781/140145/no-pic.jpg"
+            v-show="$store.state.mobile"
+          />
+          <!-- <img
+            class="header_sculpture_img"
+            :src="$store.state.mobile"
+            v-show="!$store.state.mobile"
+          /> -->
+        </span>
+        <div class="log" v-show="!$store.state.mobile">
             <span class="header_signIn" @click="signIn">登录</span>
             <span>/</span>
             <span class="header_signIn" @click="signUp">注册</span>
           </div>
-        </div>
+        <span class="header_signIn" v-show="$store.state.mobile">{{$store.state.mobile}}</span>
+
       </div>
       <!-- account -->
       <div class="account">
@@ -127,18 +134,41 @@
   import Vue from "vue";
   import { Grid, GridItem } from "vant";
 
-  Vue.use(Grid);
-  Vue.use(GridItem);
-  export default {
-    methods: {
-      signIn() {
+
+Vue.use(Grid);
+Vue.use(GridItem);
+export default {
+  data () {
+    return {
+      icon:""
+    }
+  },
+   methods:{
+       logOn(){
+           this.$router.push('/user/login')
+       },
+        signIn() {
         this.$router.push("/user/login");
       },
       signUp() {
         this.$router.push("/user/register");
       },
-    },
-  };
+   },
+   created () {
+     let x = localStorage.getItem("jwt");
+     if(!x){
+       return
+     }else{
+       this.$http.get("/api/info").then(ret=>{
+         if(ret.code===0){
+           this.$store.commit("setMob",ret.userinfo.mobile)
+         }
+        })
+     }
+   }
+   
+};
+
 </script>
 <style lang="scss" scoped>
   i {
